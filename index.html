@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Added link to the jQuery Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Added a link to Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="container"></div>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <h1>Crystal Collector Game!</h1>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+    </div>
+    <div>
+        <p> -You will be given a random number at the start of the game.</p>
+        <p> -Click the crystals to find their value and try to match up your score to the number given</p>
+        <p> -If your scores match then you win the game!</p>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card" id="blueGem" style="width: 12rem;">
+                <img class="card-img-top" src="https://vignette.wikia.nocookie.net/crashban/images/e/e8/Crash_Nitro_Kart_Blue_Gem.png/revision/latest?cb=20170520002437"
+                    alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Blue Gem!</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card" id="redGem" style="width: 12rem;">
+                <img class="card-img-top" src="https://vignette.wikia.nocookie.net/crashban/images/b/b3/Crash_Nitro_Kart_Red_Gem.png/revision/latest?cb=20170520003355"
+                    alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Red Gem!</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card" id="greenGem" style="width: 12rem;">
+                <img class="card-img-top" src="https://vignette.wikia.nocookie.net/crashban/images/b/ba/Crash_Nitro_Kart_Green_Gem.png/revision/latest?cb=20170520002854"
+                    alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Green Gem!</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card" id="pinkGem" style="width: 12rem;">
+                <img class="card-img-top" src="https://vignette.wikia.nocookie.net/crashban/images/6/65/Crash_Nitro_Kart_Purple_Gem.png/revision/latest?cb=20170520003725"
+                    alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Pink Gem!</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+            <p id="currentNumber">Current Number:</p>
+        </div>
+        <div class="col-lg-2">
+            <p id="targetNumber">Target Number:</p>
+        </div>
+        <div class="col-lg-2">
+            <p id="wins">Wins:</p>
+        </div>
+        <div class="col-lg-2">
+            <p id="losses">losses:</p>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+    </div>
+
+
+</body>
+
+</html>
+
+<script type="text/javascript">
+
+    var computerChoice;
+    var blueGem;
+    var greenGem;
+    var redGem;
+    var pinkGem;
+    var wins = 0;
+    var losses = 0;
+    var total = 0;
+
+    function resetValues() {
+        blueGem = Math.floor(Math.random() * 20 + 1);
+        greenGem = Math.floor(Math.random() * 10 + 1);
+        redGem = Math.floor(Math.random() * 5 + 1);
+        pinkGem = Math.floor(Math.random() * 50 + 1);
+        computerChoice = Math.floor(Math.random() * 100 + 100);
+        total = 0;
+        $("#targetNumber").text("Target Number = " + computerChoice);
+        console.log(blueGem, greenGem, redGem, pinkGem, computerChoice)
+    }
+
+    $(document).ready(function () {
+        resetValues();
+    });
+
+    function check() {
+    if (total === computerChoice) {
+        alert("You Win!!")
+        wins++;
+        $("#wins").text("Wins: " + wins);
+        resetValues();
+    };
+    if (total > computerChoice) {
+        alert("You Lose!!")
+        losses++;
+        $("#losses").text("Losses: " + losses);
+        resetValues();
+    };
+    };
+
+    $("#blueGem").on("click", function () {
+        total = total + blueGem;
+        $("#currentNumber").text("Current total = " + total);
+        check();
+    });
+
+    $("#greenGem").on("click", function () {
+        total = total + greenGem;
+        $("#currentNumber").text("Current total = " + total);
+        check();
+    });
+
+    $("#pinkGem").on("click", function () {
+        total = total + pinkGem;
+        $("#currentNumber").text("Current total = " + total);
+        check();
+    });
+
+    $("#redGem").on("click", function () {
+        total = total + redGem;
+        $("#currentNumber").text("Current total = " + total);
+        check();
+    });
+
+</script>
